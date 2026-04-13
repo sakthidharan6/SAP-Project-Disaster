@@ -1,0 +1,72 @@
+unmanaged implementation in class zbp_dstr_22it unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZCIT_IDSTR_22IT alias Disaster
+draft table zcit_dstr_d_22it
+lock master total etag LocalLastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  // Field controls for Header
+  field ( mandatory : create ) DisasterID;
+  field ( readonly : update ) DisasterID;
+  field ( readonly ) LocalCreatedAt, LocalCreatedBy, LocalLastChangedAt, LocalLastChangedBy, LastChangedAt;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  association _Resource { create; with draft; }
+
+  mapping for zcit_dstr_22it
+  {
+    DisasterID = disaster_id;
+    DisasterType = disaster_type;
+    Severity = severity;
+    Location = location;
+    Status = status;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+}
+
+define behavior for ZCIT_IRESC_22IT alias Resource
+draft table zcit_resc_d_22it
+lock dependent by _Disaster
+authorization dependent by _Disaster
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  // Field controls for Item
+  field ( readonly ) DisasterID; // Protected for parent dependency
+  field ( mandatory : create ) ResourceID;
+  field ( readonly : update ) ResourceID;
+  field ( readonly ) LocalCreatedAt, LocalCreatedBy, LocalLastChangedAt, LocalLastChangedBy, LastChangedAt;
+
+  association _Disaster { with draft; }
+
+  mapping for zcit_resc_22it
+  {
+    DisasterID = disaster_id;
+    ResourceID = resource_id;
+    ResourceType = resource_type;
+    Quantity = quantity;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+}

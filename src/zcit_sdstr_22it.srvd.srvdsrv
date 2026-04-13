@@ -1,0 +1,5 @@
+@EndUserText.label: 'Disaster Management Service'
+define service ZCIT_SDSTR_22IT {
+  expose ZCIT_CDSTR_22IT as DisasterHeader;
+  expose ZCIT_CRESC_22IT as DisasterResource;
+}

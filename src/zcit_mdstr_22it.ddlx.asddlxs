@@ -1,0 +1,37 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Disaster Incident',
+    typeNamePlural: 'Disaster Incidents',
+    title: { type: #STANDARD, value: 'DisasterID' }
+  }
+}
+annotate entity ZCIT_CDSTR_22IT with
+{
+  @UI.facet: [
+    { id: 'idstr', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Incident Details', position: 10 },
+    { id: 'iresc', purpose: #STANDARD, type: #LINEITEM_REFERENCE, label: 'Assigned Resources', position: 20, targetElement: '_Resource' }
+  ]
+
+  @UI: { lineItem:       [ { position: 10, label: 'Disaster ID' } ],
+         identification: [ { position: 10, label: 'Disaster ID' } ],
+         selectionField: [ { position: 10 } ] }
+  DisasterID;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Type' } ],
+         identification: [ { position: 20, label: 'Type' } ],
+         selectionField: [ { position: 20 } ] }
+  DisasterType;
+
+  @UI: { lineItem:       [ { position: 30, label: 'Severity' } ],
+         identification: [ { position: 30, label: 'Severity' } ] }
+  Severity;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Location' } ],
+         identification: [ { position: 40, label: 'Location' } ] }
+  Location;
+
+  @UI: { lineItem:       [ { position: 50, label: 'Status' } ],
+         identification: [ { position: 50, label: 'Status' } ] }
+  Status;
+}

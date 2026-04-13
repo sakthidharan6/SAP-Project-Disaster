@@ -1,0 +1,27 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName: 'Resource',
+    typeNamePlural: 'Resources',
+    title: { type: #STANDARD, value: 'ResourceID' }
+  }
+}
+annotate entity ZCIT_CRESC_22IT with
+{
+  @UI.facet: [ { id: 'iresc', purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'Resource Details', position: 10 } ]
+
+  @UI.hidden: true
+  DisasterID;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Resource ID' } ],
+         identification: [ { position: 10, label: 'Resource ID' } ] }
+  ResourceID;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Resource Type' } ],
+         identification: [ { position: 20, label: 'Resource Type' } ] }
+  ResourceType;
+
+  @UI: { lineItem:       [ { position: 30, label: 'Quantity' } ],
+         identification: [ { position: 30, label: 'Quantity' } ] }
+  Quantity;
+}
